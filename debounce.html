@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>防抖</title>
+    <style>
+        .wrapper {
+            height: 5000px;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        function debounce(fn, interval) {
+            let timer = null;
+            let flag = true;
+            return function () {
+                if (timer !== null) {
+                    clearTimeout(timer)
+                } 
+                flag && fn();
+                flag = false;
+                timer = setTimeout(() => {
+                    flag = true;
+                }, interval);
+            }
+        }
+        let handleClick =  debounce(log, 1000)
+        function log() {
+            console.log('触发')
+        }
+        window.addEventListener('scroll', debounce(log, 1000));
+    </script>
+    <button onclick="handleClick()">点击</button>
+    <div class="wrapper">
+    </div>
+</body>
+
+</html>

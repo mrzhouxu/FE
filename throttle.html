@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>节流</title>
+    <style>
+        .wrapper {
+            height: 5000px;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        function throttle(fn, interval) {
+            let flag = true;
+            return function () {
+                if (!flag) return;
+                flag = false;
+                setTimeout(function () {
+                    flag = true;
+                    fn();
+                }, interval);
+            }
+        }
+        function handleClick() {
+            console.log('点击', this)
+        }
+        window.onscroll = throttle(handleClick, 1000);
+    </script>
+    <button onclick="handleClick()">点击</button>
+    <div class="wrapper"></div>
+</body>
+
+</html>
