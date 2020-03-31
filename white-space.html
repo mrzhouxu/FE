@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>不换行</title>
+    <style>
+        html,
+        body,ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        .mod_slide_list {
+            font-size: 0;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            overflow: hidden;
+            overflow-x: auto;
+        }
+
+        .mod_slide_list_item {
+            width: 100%;
+            position: relative;
+            height: 0;
+            overflow: hidden;
+            padding-top: 45.33333%;
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <ul class="mod_slide_list">
+        <li class="mod_slide_list_item">
+            <img src="http://jdc.jd.com/img/750x340">
+        </li>
+        <li class="mod_slide_list_item">
+            <img src="http://jdc.jd.com/img/750x340">
+        </li>
+        <li class="mod_slide_list_item">
+            <img src="http://jdc.jd.com/img/750x340">
+        </li>
+    </ul>
+    <div>
+        精髓：
+        父元素 overflow-x: auto; white-space: nowrap;
+        子元素 display:inline-block;
+    </div>
+</body>
+
+</html>
