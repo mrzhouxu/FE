@@ -3,9 +3,9 @@
  * @param {number[]} nums
  */
 
- /**
-  * sort 超时
-  */
+/**
+ * sort 超时
+ */
 // /**
 //  * @param {number} k
 //  * @param {number[]} nums
@@ -88,24 +88,32 @@
 // console.log(kthLargest.add(9));   // returns 8
 // console.log(kthLargest.add(4));   // returns 8
 
+
+/**
+ * 超时 偶尔通过
+ */
 function swap(arr, i, j) {
     [arr[i], arr[j]] = [arr[j], arr[i]];
 }
 
 function heapify(arr, len, i) {
-    if (i >= len) return;
-    let leftChildIndex = 2 * i + 1;
-    let rightChildIndex = 2 * i + 2;
-    let max = i;
-    if (leftChildIndex < len && arr[leftChildIndex] > arr[max]) {
-        max = leftChildIndex;
-    }
-    if (rightChildIndex < len && arr[rightChildIndex] > arr[max]) {
-        max = rightChildIndex;
-    }
-    if (max != i) {
-        swap(arr, i, max);
-        heapify(arr, len, max);
+    while(true) {
+        if (i >= len) return;
+        let leftChildIndex = 2 * i + 1;
+        let rightChildIndex = 2 * i + 2;
+        let max = i;
+        if (leftChildIndex < len && arr[leftChildIndex] > arr[max]) {
+            max = leftChildIndex;
+        }
+        if (rightChildIndex < len && arr[rightChildIndex] > arr[max]) {
+            max = rightChildIndex;
+        }
+        if (max != i) {
+            swap(arr, i, max);
+            i = max;
+        } else {
+            return;
+        }
     }
 }
 
@@ -125,7 +133,7 @@ function filterArr(arr, len, k) {
         count++;
         swap(arr, i, 0);
         heapify(arr, i, 0);
-        if(count == k) {
+        if (count == k) {
             return arr.slice(len - k);
         }
     }
