@@ -1,6 +1,6 @@
 Promise.all = function (promises) {
     return new Promise(function (resolve, reject) {
-        if(!Array.isArray(promises)) {
+        if (!Array.isArray(promises)) {
             return reject(new TypeError('arguments must be an array'))
         }
         let result = [];
@@ -10,6 +10,25 @@ Promise.all = function (promises) {
                 result[index] = data;
                 count++;
                 if (count == promises.length) {
+                    resolve(result);
+                }
+            }, reject)
+        })
+    })
+}
+
+Promise.all = function (promises) {
+    return new Promise((resolve, reject) => {
+        if (!Array.isArray(promises)) {
+            return reject(new TypeError('arguments must be an array'));
+        }
+        let result = [],
+            count = 0;
+        promises.forEach((item, index) => {
+            item.then(function (data) {
+                result[index] = data;
+                count++;
+                if (count === promises.length) {
                     resolve(result);
                 }
             }, reject)
