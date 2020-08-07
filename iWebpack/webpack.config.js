@@ -1,10 +1,21 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
     mode: 'development',  // development 和 production 开发模式和生产模式，生产模式下代码会进行压缩
+    // development devtool: 'cheap-module-eval-source-map',
+    // production devtool: 'cheap-module-source-map',
+    devtool: 'cheap-module-eval-source-map',
     // entry: './src/index.js',  // 与下面写法相等
     entry: {  // 打包输入 打包入口
-        main: './src/index.js'
+        main: './src/index.js',  // 多入口
+        sub: './src/index.js'
+    },
+    devServer: {
+        contentBase: path.join(__dirname, 'dist'),  // 服务器启动在哪个目录下
+        open: true,  // 自动打开浏览器
+        port: 9000
     },
     module: {
         rules: [  // 一些规则
@@ -47,7 +58,15 @@ module.exports = {
         ]
     },
     output: {  // 打包输出
-        filename: 'bundle.js',  // 输出文件名
+        // publicPath: 'https://www.baidu.com/',  // 配置资源域名
+        publicPath: '/',  // 所有打包生成的文件引用都加一个根路径
+        filename: '[name].js',  // 输出文件名  多入口打包的时候，这里不能用单一的文件名
         path: path.resolve(__dirname, 'dist')  // 输出路径
-    }
+    },
+    plugins: [
+        new HtmlWebpackPlugin({  // 插件打包的时候会自动向 html 中插入资源文件，多文件打包时也可以
+            template: 'src/index.html'
+        }),
+        new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
+    ]
 }

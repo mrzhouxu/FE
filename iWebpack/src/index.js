@@ -12,7 +12,7 @@ const root = document.getElementById('root');
 
 root.innerHTML = '<div class="iconfont icon-bussiness-man"></div>'
 
-
+console.log('xxxxxx!!!!!!')
 
 
 // console.log(a,b,c,img)
